@@ -505,32 +505,110 @@ using namespace std;
 
 
 //Last Occurance of a CHAR in a String    //(METHOD ! -> right to left )
-void LastOccRtL(string& s , char &x , int i , int& ans){
-    if(i<0){
+// void LastOccRtL(string& s , char &x , int i , int& ans){
+//     if(i<0){
+//         return;
+//     }
+
+//     if(s[i]==x){
+//         ans=i;
+//         return;
+//     }
+
+//     LastOccRtL(s,x,i-1,ans);
+// }
+
+// int main(){
+//     string s;
+//     cout << "Enter string : ";
+//     cin>>s;
+    
+//     char x;
+//     cout  << endl << "Enter char : " ;
+//     cin >> x;
+
+//     int i=s.size()-1;
+//     int ans=-1;
+
+//     LastOccRtL(s,x,i,ans);
+
+//     cout <<endl << ans;
+// }
+
+
+//Reverse a string Recursively
+// void reverseString(string&s ,int start, int end){
+//     if(start>=end){
+//         return;
+//     }
+//     swap(s[start],s[end]);
+//     reverseString(s,start+1,end-1);
+// }
+// int main(){
+//     string s;
+//     cout << "Enter string : ";
+//     cin>>s;
+
+//     int start = 0;
+//     int end = s.size()-1;
+
+//     reverseString(s,start,end);
+
+
+//     cout <<endl << s;
+// }
+
+
+// Palindrome cheeck RE 
+//  bool palindrome(string& s  , int start , int end){
+//     if(start>=end){
+//         return true;
+//     }
+
+//     if(s[start]!=s[end]){
+//         return false;
+//     }
+    
+//     return palindrome(s,start+1,end-1);
+// }
+// int main(){
+//     string s = "racecar";
+//     int start = 0;
+//     int end = s.size()-1;
+//     bool ans = palindrome(s,start , end);
+//     cout << ans;
+
+// }
+
+
+// Print all subarrays using RE
+void printSubArray(vector<int>& arr, int start , int end){
+    //base case
+    if(end>=arr.size()){
         return;
     }
 
-    if(s[i]==x){
-        ans=i;
-        return;
+    for(int i=start;i<=end;i++){
+        cout << arr[i] << " ";
     }
+    cout <<endl;
 
-    LastOccRtL(s,x,i-1,ans);
+    //RE
+    printSubArray(arr,start,end+1);
+}
+
+void subArray(vector<int>&arr){
+    
+    for(int start = 0 ; start<arr.size() ; start++){
+        int end = start;
+
+        printSubArray(arr,start,end);
+    }
 }
 
 int main(){
-    string s;
-    cout << "Enter string : ";
-    cin>>s;
-    
-    char x;
-    cout  << endl << "Enter char : " ;
-    cin >> x;
+    vector<int>arr{1,2,3,4,5};
+    subArray(arr);
 
-    int i=s.size()-1;
-    int ans=-1;
-
-    LastOccRtL(s,x,i,ans);
-
-    cout <<endl << ans;
+    return 0;
 }
