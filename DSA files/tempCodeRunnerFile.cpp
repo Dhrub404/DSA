@@ -1,1 +1,1 @@
-    // animal d(b); 
+ // Dog* d = (Dog*)new Animal();
