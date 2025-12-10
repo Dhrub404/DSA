@@ -17,6 +17,16 @@ class Node{
         this->data=data;
         this->next=NULL;
     }
+    ~Node() {
+        int value = this->data;
+        // recursively delete the rest of the linked list
+        if (this->next != NULL) {
+            delete next;
+            this->next = NULL;
+        }
+        cout << "Memory freed for node with data: " << value << endl;
+    }
+
 };
 
 //Printing LL
@@ -145,6 +155,45 @@ void insertAtPosition(int data ,int position ,Node* &head ,Node* &tail){
 
 
 
+//Insertion based on value
+void insertBasedOnValue(int data ,int value ,Node* &head ,Node* &tail){
+    //when LL is empty
+    if (head == NULL) {
+        cout << "Linked List is empty. Cannot insert based on value." << endl;
+        return;
+    }
+
+    Node* prev = head;
+
+    // Step 1: Search for the value
+    while (prev != NULL && prev->data != value) {
+        prev = prev->next;
+    }
+
+    Node* curr = prev->next;
+
+    // If value not found
+    if (curr == NULL) {
+        cout << "Value " << value << " not found in the list." << endl;
+        return;
+    }
+
+    // Step 2: Insert after the found node
+    Node* newNode = new Node(data);
+
+    newNode->next = curr;  // link newNode to curr
+    prev->next = newNode;        // link prev to newNode
+
+    // Step 3: If inserted at tail, update tail
+    if (newNode->next == NULL) {
+        tail = newNode;
+    }
+
+
+}
+
+
+
 
 //DELETION
 //delete HEAD
@@ -194,7 +243,54 @@ void deleteNode(int position , Node* &head , Node* &tail){
     curr->next = NULL;
     delete curr;
 
+}
 
+
+void deleteBasedOnValue(int value, Node* &head, Node* &tail) {
+
+    // Case 1: Empty list
+    if (head == NULL) {
+        cout << "Linked List is empty. Cannot delete based on value." << endl;
+        return;
+    }
+
+    Node* prev = NULL;
+    Node* curr = head;
+
+    // Case 2: deleting HEAD (value found at first node)
+    if (curr->data == value) {
+        head = head->next;
+        curr->next = NULL;   // detach
+        delete curr;
+
+        // If list becomes empty
+        if (head == NULL)
+            tail = NULL;
+
+        return;
+    }
+
+    // Case 3: Search for the value
+    while (curr != NULL && curr->data != value) {
+        prev = curr;
+        curr = curr->next;
+    }
+
+    // Case 4: Value NOT found
+    if (curr == NULL) {
+        cout << "Value " << value << " not found in the list." << endl;
+        return;
+    }
+
+    // Case 5: Delete tail
+    if (curr->next == NULL) {
+        tail = prev;
+    }
+
+    // Case 6: Delete middle node
+    prev->next = curr->next;
+    curr->next = NULL; // detach before destructor recursion
+    delete curr;
 }
 
 
@@ -240,6 +336,11 @@ int main(){
 
     cout <<endl;
     insertAtPosition(100,8,head,tail);
+    print(head);
+
+    cout << endl;
+    cout << " value based:";
+    insertBasedOnValue(99,20,head,tail);
 
     print(head);
     cout << endl;
@@ -259,8 +360,13 @@ int main(){
     cout << "Deleting specific position : " <<endl;
     deleteNode(4,head,tail);
     print(head);
-    
+    cout << endl;
 
+    cout << "Deleting based on value : " <<endl;
+    deleteBasedOnValue(20,head,tail);
+    print(head);
+    cout << endl;
+    
     return 0;
 }
-
+//Here I haven't created a function seperatly to delete the complete linked list ..... I have just the destructor to delete the complete list if needed
