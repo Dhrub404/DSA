@@ -292,7 +292,7 @@ Node* getMiddle(Node* &head){
     Node* fast = head->next ;    //we have initialized fast with head->next coz we need get 30 as middle for even nodes & this doesn't affects odd case    && if we want 40 as middle node and make fast = head 
     int len = findLength(head);
 
-    while(slow != NULL && fast != NULL){      //sllow != NULL not needed it doesn't effect anything
+    while(slow != NULL && fast != NULL){      //slow != NULL not needed it doesn't effect anything
         fast = fast->next;
         if(fast != NULL){
             fast = fast->next;

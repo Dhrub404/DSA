@@ -1,1 +1,3 @@
-    cout << "Loop is present or not: " << checkLoop(head) << endl;
+int inorderSuccessor(Node* root){
+    
+// }
