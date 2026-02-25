@@ -113,14 +113,14 @@ void takeInput(Node* &root){
     }
 }
 
-bool findNodeInBST(Node* root , int &target){
+Node* findNodeInBST(Node* root , int target){
     //base case
     if(root == NULL){
-        return false;
+        return NULL;
     }
 
     if(root->data == target){
-        return true;
+        return root;
     }
     if(target > root->data){
         //search in right subtree
@@ -219,15 +219,65 @@ int inorderSuccessor(Node* root , int key ){
     return succ->data;
 }
 
+
+//Deletion in BST
+Node* deleteNodeInBST(Node* root , int target){
+    //base case 
+    if(root == NULL){
+        return NULL;
+    }
+
+    // step 1 --> find target node
+    if(root->data == target){
+
+        //step 2 --> delete this node ... to delete node we have 4 possible cases
+
+        //case 1 both leaf nodes are null
+        if(root->left == NULL && root->right == NULL){
+            delete root;
+            return NULL;
+        }
+        //case 2 right leaf node is null and the left is non null
+        else if(root->left != NULL && root->right == NULL){
+            Node* child = root->left;
+            delete root;
+            return child;
+        }
+        //case 3 left leaf node is null and the right is non null
+        else if(root->left == NULL && root->right != NULL){
+            Node* child = root->right;
+            delete root;
+            return child;
+        }
+        // case 4 : both are non nulll : we return inorder predecessor here i.e. left sub tree ki max. value
+        else{
+            int inorderPre = inorderPredecessor(root ,target);
+            root->data = inorderPre;
+            root->left = deleteNodeInBST(root->left , inorderPre);
+            return root;
+        }
+    }
+    if(target > root->data){
+        //search in right subtree
+        root->right = deleteNodeInBST(root->right,target);
+    }
+    else{
+        //search in left subtree
+        root->left = deleteNodeInBST(root->left,target);
+    }
+
+    return root;
+}
+
 int main(){
     Node* root = NULL;
     cout <<"Enter the data for Node: " << endl;
     takeInput(root);
     cout << endl;
 
-    // cout << "Printing BST: " << endl;
-    // levelOrderTraversal(root);
-    // cout << endl;
+    cout << "Printing BST: " << endl;
+    levelOrderTraversal(root);
+    cout << endl;
 
     // cout << "Inorder Traversal: " << endl;
     // inOrder(root);
@@ -249,23 +299,35 @@ int main(){
     //     cout << "Node not found" << endl;
     // }
 
-    //Minimum value in BST
-    cout << endl;
-    cout << "Minimum value in BST: " << " " << minVal(root);
+    // //Minimum value in BST
+    // cout << endl;
+    // cout << "Minimum value in BST: " << " " << minVal(root);
 
-    //Maximum value in BST
-    cout << endl;
-    cout << "Maximum value in BST: " << " " << maxVal(root);
+    // //Maximum value in BST
+    // cout << endl;
+    // cout << "Maximum value in BST: " << " " << maxVal(root);
 
-    //INorder Predeccessor
-    cout << endl;
-    int key  = 20;
-    cout << "Inorder Predecessor of " << key << " is " <<  inorderPredecessor(root , key);
-
-    //INorder Sucessor
-    cout << endl;
+    // //INorder Predeccessor
+    // cout << endl;
     // int key  = 20;
-    cout << "Inorder Successor of " << key << " is " <<  inorderSuccessor(root , key);
+    // cout << "Inorder Predecessor of " << key << " is " <<  inorderPredecessor(root , key);
+
+    // //INorder Sucessor
+    // cout << endl;
+    // // int key  = 20;
+    // cout << "Inorder Successor of " << key << " is " <<  inorderSuccessor(root , key) << endl;
+
+    //Delete a Node in BST
+    cout << endl;
+    int target = 100;
+    cout << "Delete the node " << target << " from BST " << endl; 
+    root = deleteNodeInBST(root,target);
+
+    cout << "Printing BST: " << endl;
+    levelOrderTraversal(root);
+    cout << endl;
+
+    
 
     return 0;
 }
