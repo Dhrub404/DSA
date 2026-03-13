@@ -60,7 +60,7 @@ class kQueue{
     int pop(int qi){
         //underflow check
         if(front[qi] == -1){
-            return 0;
+            return -1;
         }
 
         //find index to pop
@@ -68,6 +68,11 @@ class kQueue{
 
         // front ko update kro
         front[qi] = next[index];
+
+        // (OPTIONAL)if there is only single element and the queue is empty , therefore rear should also be -1
+        if(front[qi] == -1){
+        rear[qi] = -1;
+        }
 
         //updates freeSpot
         next[index] = freeSpot;
