@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 using namespace std;
 
 class Heap{
@@ -175,13 +176,64 @@ int main(){
 
 
     // HEAP SORT
-    int a[] = {-1,100,50,60,20,30};
-    int n = 5;
+    // int a[] = {-1,100,50,60,20,30};
+    // int n = 5;
 
-    heapSort(a , n);
-    cout << "Printing the Heap Sort" << endl;
-    for(int i=0;i<=n;i++){
-        cout << a[i] << " ";
+    // heapSort(a , n);
+    // cout << "Printing the Heap Sort" << endl;
+    // for(int i=0;i<=n;i++){
+    //     cout << a[i] << " ";
+    // }
+
+
+    //PRIOIRITY QUEUE
+    cout <<"Implementing Priority queue:" << endl;
+
+    //max heap
+    // priority_queue<int> pq;
+
+    // pq.push(4);
+    // pq.push(2);
+    // pq.push(5);
+    // pq.push(3);
+
+    // // top element
+    // cout << "Element on top: " << pq.top() << endl;
+    // pq.pop();
+    // // top element
+    // cout << "Element on top: " << pq.top() << endl;
+    // //size
+    // cout << "Size of max heap " << pq.size() << endl;
+    // //check empty
+    // if(pq.empty()){
+    //     cout << "Empty" << endl;
+    // }
+    // else{
+    //     cout << "Not Empty" << endl;
+    // }
+
+
+    // MIN HEAP
+    priority_queue<int, vector<int>, greater<int>> minHeap;
+
+    minHeap.push(4);
+    minHeap.push(2);
+    minHeap.push(5);
+    minHeap.push(3);
+
+    // top element
+    cout << "Element on top: " << minHeap.top() << endl;
+    minHeap.pop();
+    // top element
+    cout << "Element on top: " << minHeap.top() << endl;
+    //size
+    cout << "Size of max heap " << minHeap.size() << endl;
+    //check empty
+    if(minHeap.empty()){
+        cout << "Empty" << endl;
+    }
+    else{
+        cout << "Not Empty" << endl;
     }
 
 }
