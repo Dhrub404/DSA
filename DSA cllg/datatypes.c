@@ -27,5 +27,21 @@ int main(){
     //     i++;
     // }
 
+    //unsigned
+    // printf("%u", (unsigned)(-4294967295));
+
+    unsigned char a = -1;
+    unsigned short int b = -1;
+    unsigned int c = -1;
+    unsigned long int d = -1;
+
+    printf("%u",a);
+    printf("%u",a);
+    printf("%u",a);
+    printf("%u",a);
+
+
+    
+
     return 0;
 }

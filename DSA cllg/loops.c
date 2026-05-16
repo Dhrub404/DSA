@@ -147,11 +147,67 @@ int main(){
     //      printf("equal");
     // }
 
-    int a=5;
-    int b = 3;
-    int c = 10;
+//     int a=5;
+//     int b = 3;
+//     int c = 10;
 
-    printf("%d", maxi(a,b,c) - mini(a,b,c));
+//     printf("%d", maxi(a,b,c) - mini(a,b,c));
+
+     //ascending ordder print
+     int a=30, b=10, c=20;
+     if(a<b){
+          if(a<c){
+               printf("%d ",a);
+               if(b<c){
+                    printf("%d ",b);
+                    printf("%d ",c);
+               }
+               else{
+                    printf("%d ",c);
+                    printf("%d ",b);
+               }
+          }
+          else{
+               printf("%d ",c);
+               printf("%d ",a);
+               printf("%d ",b);    
+          }
+     }
+     else if(b<a){
+          if(b<c){
+               printf("%d ",b);
+               if(a<c){
+                    printf("%d ",a);
+                    printf("%d ",c);
+               }
+               else{
+                    printf("%d ",c);
+                    printf("%d ",a);
+               }
+          }
+          else{
+               printf("%d ",c);
+               printf("%d ",b);
+               printf("%d ",a);    
+          }
+     }else if(c < a){
+          if(c<b){
+               printf("%d ",c);
+               if(a<b){
+                    printf("%d ",a);
+                    printf("%d ",b);
+               }
+               else{
+                    printf("%d ",b);
+                    printf("%d ",a);
+               }
+          }
+          else{
+               printf("%d ",b);
+               printf("%d ",c);
+               printf("%d ",a);    
+          }
+     }
 
     return 0;
 }

@@ -1,1 +1,1 @@
-}
+out << adjacentSwap(n) << endl;
