@@ -46,12 +46,6 @@ int main(){
 
 
 
-
-
-
-
-
-
 //DOUBLY ENDED QUEUE(DEQUE) IMPLEMENTATION USING CLASS
 // class deque{
 //     public:

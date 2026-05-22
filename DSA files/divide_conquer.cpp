@@ -176,8 +176,7 @@ using namespace std;
 //         //RE call
 //         printPermutations(str,i+1);
 
-//         //BAcktracking : used coz we have passed the string here by refernce so to get the main string for 
-           //next iteration we must swap the elements again(Inshort -: to recreate the original input)
+//         //BAcktracking : used coz we have passed the string here by refernce so to get the main string for next iteration we must swap the elements again(Inshort -: to recreate the original input)
 //         swap(str[i],str[j]);
 //     }
 

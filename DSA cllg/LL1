@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+
+//Creating Node
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(){
+        this->data=0;
+        this->next=NULL;
+    }
+
+    Node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+
+    //destructor
+    ~Node() {
+        int value = this->data;
+        // recursively delete the rest of the linked list
+        if (this->next != NULL) {
+            delete next;
+            this->next = NULL;
+        }
+        cout << "Memory freed for node with data: " << value << endl;
+    }
+
+};
+
+
+int main(){
+
+
+    return 0;
+}
