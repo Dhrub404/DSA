@@ -285,8 +285,6 @@ Node* getMiddle(Node* &head){
         return head;
     }
 
-
-
     //non-empty
     Node* slow = head ;
     Node* fast = head->next ;    //we have initialized fast with head->next coz we need get 30 as middle for even nodes & this doesn't affects odd case    && if we want 40 as middle node and make fast = head 

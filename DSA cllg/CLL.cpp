@@ -1,59 +1,56 @@
 #include<iostream>
 using namespace std;
 
-//Creating Node
-class Node{
-    public:
+class Node {
+public:
     int data;
     Node* next;
 
-    Node(){
-        this->data=0;
-        this->next=NULL;
-    }
-
-    Node(int data){
-        this->data=data;
-        this->next=NULL;
-    }
-
-    //destructor
-    ~Node() {
-        int value = this->data;
-        // recursively delete the rest of the linked list
-        if (this->next != NULL) {
-            delete next;
-            this->next = NULL;
-        }
-        cout << "Memory freed for node with data: " << value << endl;
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
     }
 };
 
-//Printing LL
+
+//Printing CLL
 void print(Node* &head){
+
+    //empty CLL
+    if(head == NULL){
+        cout << "Empty CLL" << endl;
+        return;
+    }
+
     Node* temp = head;
-    while(temp!=NULL){
+
+    do{
         cout << temp->data << " ";
         temp = temp->next;
-    }
+
+    }while(temp != head);
 }
 
 //insert using jump no need of head and tail in this
 void jumpInsert(Node* &root,int data){
     Node* newNode = new Node(data);
-    Node* temp = root;
 
+    //when CLL is empty
     if(root == NULL){
         root = newNode;
+        newNode->next = root;
         return;
     }
 
-    while(temp->next != NULL){
+    Node* temp = root;
+
+    //go till last node
+    while(temp->next != root){
         temp = temp->next;
     }
+
     temp->next = newNode;
-
-
+    newNode->next = root;
 }
 
 //Inserting a node at the head of the Linked List
@@ -64,19 +61,23 @@ void insertAtHead(Node* &head ,Node* &tail ,int data){
         Node* newNode = new Node(data);
         head = newNode;
         tail = newNode;
-        return; 
+
+        //making circular connection
+        tail->next = head;
+        return;
     }
 
     //step1:
     Node* newNode = new Node(data);
+
     //step2:
     newNode->next = head;
+
     //step3:
-    // //First node    :: //Initailizing the Head and Tail by first new node coz the LL is empty
-    // if(head==NULL){
-    //     tail = newNode;
-    // }
     head = newNode;
+
+    //step4:
+    tail->next = head;
 }
 
 //Inserting a node at the end of the LL
@@ -87,40 +88,42 @@ void insertAtTail(Node* &head ,Node* &tail , int  data){
         Node* newNode = new Node(data);
         head = newNode;
         tail = newNode;
-        return; 
+
+        //making circular connection
+        tail->next = head;
+        return;
     }
 
     //step1:
     Node* newNode = new Node(data);
-    //step2:   step 2 has 2 method to write code both given below
-    //METHOD 1
-    // if(tail != NULL){
-    //     tail->next = newNode;
-    // }
-    //OR METHOD 2
-    if(tail == NULL){
-        //Initailizing the Head and Tail by first new node coz the LL is empty
-        tail = newNode;
-        head = newNode;
-    }
-    else{
-        //LL is non empty
-        tail->next = newNode;
-    }
+
+    //step2:
     tail->next = newNode;
- 
+
     //step3:
     tail = newNode;
+
+    //step4:
+    tail->next = head;
 }
 
 //FIND length of the linked list
 int findLength(Node* head) {
+
+    //empty CLL
+    if(head == NULL){
+        return 0;
+    }
+
     int length = 0;
     Node* temp = head;
-    while(temp != NULL) {
+
+    do{
         length++;
         temp = temp->next;
-    }
+
+    }while(temp != head);
+
     return length;
 }
 
@@ -132,37 +135,42 @@ void insertAtPosition(int data ,int position ,Node* &head ,Node* &tail){
         Node* newNode = new Node(data);
         head = newNode;
         tail = newNode;
-        return; 
-    }
 
+        tail->next = head;
+        return;
+    }
 
     //step 1 : find the position : find prev & curr
     if(position == 0){
         insertAtHead(head,tail,data);
         return;
     }
+
     int len = findLength(head);
+
     if(position >= len){
         insertAtTail(head,tail,data);
         return;
     }
+
     int i=1;
     Node* prev = head;
+
     while(i<position){
         prev = prev->next;
         i++;
     }
+
     Node* curr = prev->next;
 
     //step 2 : create a new node
     Node* newNode  = new Node(data);
 
     //step 3 : newNode ka next points to curr
-    newNode-> next = curr;
+    newNode->next = curr;
 
     //step 4 : prev ka next points to newNode
     prev->next = newNode;
-
 }
 
 //delete a node
@@ -171,33 +179,52 @@ void deleteNode(Node *&head, Node *&tail, int position){
         cout << "Can not delete because ll is empty: " << endl;
         return;
     }
+
     if (position <= 0){
         cout << "can not delete at 0 because index is starting for 1: " << endl;
         return;
     }
+
     // delete the head
     if (position == 1){
+        //single node CLL
+        if(head == tail){
+            delete head;
+            head = NULL;
+            tail = NULL;
+            return;
+        }
+
         Node *temp = head;
         head = head->next;
+
+        tail->next = head;
+
         temp->next = nullptr;
         delete temp;
         return;
     }
 
     int len = findLength(head);
+
     // delete at end
     if (position == len){
+
         Node *temp = tail;
+
         // find prev
         int i = 1;
         Node *prev = head;
+
         while (i < position - 1){
             prev = prev->next;
             i++;
         }
+
         // delete
-        prev->next = nullptr;
+        prev->next = head;
         tail = prev;
+
         delete temp;
         return;
     }
@@ -205,25 +232,32 @@ void deleteNode(Node *&head, Node *&tail, int position){
     // delete at position
     int i = 1;
     Node *prev = head;
-    while (i < position - 1)
-    {
+
+    while (i < position - 1){
         prev = prev->next;
         i++;
     }
+
     Node *curr = prev->next;
 
     prev->next = curr->next;
+
     curr->next = nullptr;
     delete curr;
 }
 
 //get middle using slow fast pointer
 int getMiddle(Node* head) {
+
+    //empty CLL
+    if(head == NULL){
+        return -1;
+    }
+
     Node* slow = head;
     Node* fast = head;
 
-    while (fast != NULL && fast->next != NULL) {
-
+    while (fast->next != head && fast->next->next != head) {
         // move the fast pointer by two nodes
         fast = fast->next->next;
 
@@ -236,105 +270,56 @@ int getMiddle(Node* head) {
 
 //searching
 bool search(Node* &head, int target){
+
+    if(head == NULL){
+        cout << "Empty list "<< endl;
+        return false;
+    }
+
     Node* temp = head;
-        if(head == NULL){
-            cout << "Empty list "<< endl;
-            return false;
-        }
-    while(temp != NULL){
+
+    do{
+
         if(temp->data == target){
             return true;
         }
+
         temp = temp->next;
-    }
+
+    }while(temp != head);
 
     return false;
 }
 
 
-//INSERTING at a specific position
-void insertAtPosition(int data ,int position ,Node* &head ,Node* &tail){
-
-    //when LL is empty
-    if(head == NULL){
-        Node* newNode = new Node(data);
-        head = newNode;
-        tail = newNode;
-        return; 
-    }
-
-    //step 1 : find the position : find prev & curr
-    if(position == 0){
-        insertAtHead(head,tail,data);
-        return;
-    }
-    int len = findLength(head);
-    if(position >= len){
-        insertAtTail(head,tail,data);
-        return;
-    }
-    int i=1;
-    Node* prev = head;
-    while(i<position){
-        prev = prev->next;
-        i++;
-    }
-    Node* curr = prev->next;
-
-    //step 2 : create a new node
-    Node* newNode  = new Node(data);
-
-    //step 3 : newNode ka next points to curr
-    newNode-> next = curr;
-
-    //step 4 : prev ka next points to newNode
-    prev->next = newNode;
-
-}
-
-int main(){
-    Node* head = new Node(10);
-    Node* second = new Node(20);
-    Node* third = new Node(30);
-    Node* fourth = new Node(40);
-    Node* fifth = new Node(50);
-    Node* tail = new Node(60);
-
-
-    head->next=second;
-    second->next=third;
-    third->next=fourth;
-    fourth->next=fifth;
-    fifth->next=tail;
-
-    //insertion using root node and jumping statement
-    Node* root = new Node(10);
-    jumpInsert(root , 20);
-    jumpInsert(root , 30);
-    jumpInsert(root , 40);
-    jumpInsert(root , 50);
-    cout << endl ;
-    print(root);
-    cout << endl;
-
-    //delete node
-    // deleteNode(head,tail, 2);
-
-    //searching
-    cout << search(head,30) << endl;
-    
-
-    // cout << endl ;
-    // print(head);
-    // cout << endl;
-
-    return 0;
-}
 
 
 
 
-//LL using jump by sir method
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CLL using jumping logic 
 // class Node {
 // public:
 //     int data;
@@ -346,11 +331,12 @@ int main(){
 //     }
 // };
 
-// class Ll {
+
+// class CLL {
 // public:
 //     Node* root;
 
-//     Ll() {
+//     CLL() {
 //         root = NULL;
 //     }
 
@@ -358,35 +344,42 @@ int main(){
 //     void append(int data) {
 //         Node* t = new Node(data);
 
+//         // first node
 //         if (root == NULL) {
 //             root = t;
+//             t->add = root;
 //             return;
 //         }
 
 //         Node* x = root;
 
-//         while (x->add != NULL) {
+//         // move till last node
+//         while (x->add != root) {
 //             x = x->add;
 //         }
 
 //         x->add = t;
+//         t->add = root;
 //     }
 
 //     // SEARCH
 //     bool search(int key) {
-//         Node* x = root;
-//         if(x == NULL){
-//             cout << "Empty list "<< endl;
+
+//         if(root == NULL){
+//             cout << "Empty list " << endl;
 //             return false;
 //         }
 
-//         while (x != NULL) {
-//             if (x->data == key) {
+//         Node* x = root;
+
+//         do{
+//             if(x->data == key){
 //                 return true;
 //             }
 
 //             x = x->add;
-//         }
+
+//         }while(x != root);
 
 //         return false;
 //     }
@@ -401,8 +394,24 @@ int main(){
 
 //         // delete first node
 //         if (root->data == key) {
+
+//             // only one node
+//             if(root->add == root){
+//                 delete root;
+//                 root = NULL;
+//                 return;
+//             }
+
+//             Node* last = root;
+
+//             while(last->add != root){
+//                 last = last->add;
+//             }
+
 //             Node* temp = root;
 //             root = root->add;
+//             last->add = root;
+
 //             delete temp;
 //             return;
 //         }
@@ -410,27 +419,35 @@ int main(){
 //         Node* prev = root;
 //         Node* curr = root->add;
 
-//         while (curr != NULL) {
+//         do{
 
-//             if (curr->data == key) {
+//             if(curr->data == key){
 //                 prev->add = curr->add;
 //                 delete curr;
 //                 return;
 //             }
 
-//             prev = curr;      
-//             curr = curr->add;  
-//         }
+//             prev = curr;
+//             curr = curr->add;
+
+//         }while(curr != root);
 //     }
 
 //     // PRINT
 //     void print() {
+
+//         if(root == NULL){
+//             cout << "Empty list" << endl;
+//             return;
+//         }
+
 //         Node* x = root;
 
-//         while (x != NULL) {
+//         do{
 //             cout << x->data << " ";
 //             x = x->add;
-//         }
+
+//         }while(x != root);
 
 //         cout << endl;
 //     }
@@ -438,23 +455,23 @@ int main(){
 
 // int main() {
 
-//     Ll l;
+//     CLL cll;
 
-//     l.append(10);
-//     l.append(20);
-//     l.append(30);
-//     l.append(40);
+//     cll.append(10);
+//     cll.append(20);
+//     cll.append(30);
+//     cll.append(40);
 
-//     l.print();
+//     cll.print();
 
 //     // SEARCH
-//     cout << l.search(30) << endl; // 1
-//     cout << l.search(100) << endl; // 0
+//     cout << cll.search(30) << endl; // 1
+//     cout << cll.search(100) << endl; // 0
 
 //     // DELETE
-//     l.del(30);
+//     cll.del(30);
 
-//     l.print();
+//     cll.print();
 
 //     return 0;
 // }
