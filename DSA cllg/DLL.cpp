@@ -36,7 +36,6 @@ void print(Node* &head){
 
 //insert using jump no need of head and tail in this
 void jumpInsert(Node* &root,int data){
-
     Node* newNode = new Node(data);
 
     //when DLL is empty
@@ -49,12 +48,13 @@ void jumpInsert(Node* &root,int data){
         return;
     }
 
-    Node* temp = root;
+    Node* temp = root->prev;
+
 
     //go till last node
-    while(temp->next != root){
-        temp = temp->next;
-    }
+    // while(temp->next != root){
+    //     temp = temp->next;
+    // }
 
     temp->next = newNode;
     newNode->prev = temp;
@@ -202,33 +202,27 @@ void insertAtPosition(int data ,int position ,Node* &head ,Node* &tail){
 
 //delete a node
 void deleteNode(Node *&head, Node *&tail, int position){
-
-    if (head == nullptr){
+    if(head == nullptr){
         cout << "Can not delete because ll is empty: " << endl;
         return;
     }
 
-    if (position <= 0){
+    if(position <= 0){
         cout << "can not delete at 0 because index is starting for 1: " << endl;
         return;
     }
 
     // delete the head
-    if (position == 1){
-
+    if(position == 1){
         //single node DLL
         if(head == tail){
-
             delete head;
-
             head = NULL;
             tail = NULL;
-
             return;
         }
 
         Node *temp = head;
-
         head = head->next;
 
         head->prev = tail;
@@ -245,11 +239,8 @@ void deleteNode(Node *&head, Node *&tail, int position){
 
     // delete at end
     if (position == len){
-
         Node *temp = tail;
-
         tail = tail->prev;
-
         tail->next = head;
         head->prev = tail;
 
@@ -330,13 +321,20 @@ int main(){
 
     Node* head = NULL;
     Node* tail = NULL;
+    Node* root = NULL;
 
     insertAtTail(head,tail,10);
     insertAtTail(head,tail,20);
     insertAtTail(head,tail,30);
     insertAtTail(head,tail,40);
 
-    print(head);
+    jumpInsert(root,60);
+    jumpInsert(root,70);
+    jumpInsert(root,80);
+    jumpInsert(root,90);
+
+    // print(head);
+    print(root);
 
     //searching
     cout << search(head,30) << endl;

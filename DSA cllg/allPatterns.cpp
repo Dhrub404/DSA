@@ -1,7 +1,66 @@
-// =========================================
-    // // 6. Half Diamond
-    // // =========================================
-    // cout << "\n6. Half Diamond\n";
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+
+    cout << "\n Solid Square of Stars\n";
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            cout << "* ";
+        }
+        cout << "\n";
+    }
+
+    cout << "\n Solid Rectangle of Stars\n";
+
+    int rows = n;
+    int cols = n + 1;
+
+    for (int i = 1; i <= rows; i++) {
+        for (int j = 1; j <= cols; j++) {
+            cout << "* ";
+        }
+        cout << "\n";
+    }
+
+    cout << "\n Right-Angle Triangle\n";
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            cout << "* ";
+        }
+        cout << "\n";
+    }
+
+
+    cout << "\n Inverted Right-Angle Triangle\n";
+
+    for (int i = n; i >= 1; i--) {
+        for (int j = 1; j <= i; j++) {
+            cout << "* ";
+        }
+        cout << "\n";
+    }
+
+   
+    cout << "\n Right-Aligned Triangle\n";
+
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n - i; j++) {
+            cout << "  ";
+        }
+        for (int j = 1; j <= i; j++) {
+            cout << "* ";
+        }
+        cout << "\n";
+    }
+
+    // cout << "\n Half Diamond\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= i; j++) {
@@ -16,10 +75,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 7. Hollow Rectangle
-    // // =========================================
-    // cout << "\n7. Hollow Rectangle\n";
+    // cout << "\n Hollow Rectangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= n; j++) {
@@ -31,10 +87,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 8. Hollow Right-Angle Triangle
-    // // =========================================
-    // cout << "\n8. Hollow Right-Angle Triangle\n";
+
+    // cout << "\n Hollow Right-Angle Triangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= i; j++) {
@@ -46,10 +100,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 9. Binary Triangle
-    // // =========================================
-    // cout << "\n9. Binary Triangle\n";
+    // cout << "\n Binary Triangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     int val = (i % 2 != 0) ? 1 : 0;
@@ -60,10 +111,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 10. Checkerboard Pattern
-    // // =========================================
-    // cout << "\n10. Checkerboard Pattern\n";
+    // cout << "\n Checkerboard Pattern\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= n; j++) {
@@ -72,10 +120,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 11. Number Triangle
-    // // =========================================
-    // cout << "\n11. Number Triangle\n";
+
+    // cout << "\n Number Triangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= i; j++) {
@@ -84,10 +130,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 12. Row Number Repeated
-    // // =========================================
-    // cout << "\n12. Row Number Repeated\n";
+    // cout << "\n Row Number Repeated\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= i; j++) {
@@ -96,10 +139,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 13. Inverted Number Triangle
-    // // =========================================
-    // cout << "\n13. Inverted Number Triangle\n";
+    // cout << "\n Inverted Number Triangle\n";
 
     // for (int i = n; i >= 1; i--) {
     //     for (int j = 1; j <= i; j++) {
@@ -108,10 +148,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 14. Continuous Number Triangle
-    // // =========================================
-    // cout << "\n14. Continuous Number Triangle\n";
+
+    // cout << "\n Continuous Number Triangle\n";
 
     // int count = 1;
     // for (int i = 1; i <= n; i++) {
@@ -121,10 +159,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 15. Number Mirror Triangle
-    // // =========================================
-    // cout << "\n15. Number Mirror Triangle\n";
+
+    // cout << "\n Number Mirror Triangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= i; j++)
@@ -134,10 +170,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 16. Alphabet Triangle
-    // // =========================================
-    // cout << "\n16. Alphabet Triangle\n";
+  
+    // cout << "\n Alphabet Triangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     char ch = 'A';
@@ -147,10 +181,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 17. Inverted Alphabet Triangle
-    // // =========================================
-    // cout << "\n17. Inverted Alphabet Triangle\n";
+ 
+    // cout << "\n Inverted Alphabet Triangle\n";
 
     // for (int i = n; i >= 1; i--) {
     //     char ch = 'A';
@@ -160,10 +192,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 18. Same Letter per Row
-    // // =========================================
-    // cout << "\n18. Same Letter per Row\n";
+
+    // cout << "\n Same Letter per Row\n";
 
     // for (int i = 1; i <= n; i++) {
     //     char ch = 'A' + i - 1;
@@ -173,10 +203,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 19. Reversed Alphabet Triangle
-    // // =========================================
-    // cout << "\n19. Reversed Alphabet Triangle\n";
+
+    // cout << "\n Reversed Alphabet Triangle\n";
 
     // for (int i = 1; i <= n; i++) {
     //     char ch = 'A' + n - 1;
@@ -186,10 +214,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 20. Full Pyramid
-    // // =========================================
-    // cout << "\n20. Full Pyramid\n";
+    // cout << "\n Full Pyramid\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= n - i; j++)
@@ -199,10 +224,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 21. Inverted Full Pyramid
-    // // =========================================
-    // cout << "\n21. Inverted Full Pyramid\n";
+  
+    // cout << "\n Inverted Full Pyramid\n";
 
     // for (int i = n; i >= 1; i--) {
     //     for (int j = 1; j <= n - i; j++)
@@ -212,10 +235,7 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 22. Diamond Pattern
-    // // =========================================
-    // cout << "\n22. Diamond Pattern\n";
+    // cout << "\n Diamond Pattern\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= n - i; j++)
@@ -232,10 +252,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 23. Alphabet Pyramid
-    // // =========================================
-    // cout << "\n23. Alphabet Pyramid\n";
+
+    // cout << "\n Alphabet Pyramid\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= n - i; j++)
@@ -249,12 +267,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 24. Butterfly Pattern
-    // // FIX: lower half starts at n-1 (not n)
-    // //      so the middle row prints exactly once
-    // // =========================================
-    // cout << "\n24. Butterfly Pattern\n";
+ 
+    // cout << "\n Butterfly Pattern\n";
 
     // for (int i = 1; i <= n; i++) {
     //     for (int j = 1; j <= i; j++)
@@ -265,7 +279,7 @@
     //         cout << "*";
     //     cout << "\n";
     // }
-    // for (int i = n - 1; i >= 1; i--) {      // <-- fixed: n-1 not n
+    // for (int i = n - 1; i >= 1; i--) {      
     //     for (int j = 1; j <= i; j++)
     //         cout << "*";
     //     for (int j = 1; j <= 2 * (n - i); j++)
@@ -275,10 +289,8 @@
     //     cout << "\n";
     // }
 
-    // // =========================================
-    // // 25. Number Spiral
-    // // =========================================
-    // cout << "\n25. Number Spiral\n";
+
+    // cout << "\n Number Spiral\n";
 
     // int size = 2 * n - 1;
 
@@ -292,3 +304,6 @@
     //     }
     //     cout << "\n";
     // }
+
+    return 0;
+}
